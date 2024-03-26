@@ -85,6 +85,8 @@ export default {
         })
         .catch((error) => {
           if (error.response.status === 401) {
+            localStorage.removeItem("admin_accessToken");
+            localStorage.removeItem("admin_refreshToken");
             this.$router.push("/admin/login");
           }
         });

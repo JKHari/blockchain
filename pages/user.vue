@@ -331,9 +331,14 @@ export default {
         .then((response) => {
           console.log(response.data, "uploads");
           this.uploads = response.data;
+          console.log(response, "on login");
         })
         .catch((error) => {
-          if (error.response.status === 401) {
+          // console.log(data.response.status, "on the error status");
+          // console.log(error, "on error logs");
+          if (data.response.status === 401) {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
             this.$router.push("/");
           }
         });
