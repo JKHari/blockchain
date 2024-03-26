@@ -158,7 +158,7 @@ export default {
       const admin_accessToken = localStorage.getItem("accessToken");
 
       axios
-        .get("http://localhost:5000/data", {
+        .get("https://node-blockchain.onrender.com/data", {
           headers: {
             Authorization: `Bearer ${admin_accessToken}`,
           },
@@ -177,7 +177,7 @@ export default {
 
       axios
         .post(
-          `http://localhost:5000/admin/status`,
+          `https://node-blockchain.onrender.com/admin/status`,
           {
             id: id,
             status: status,

@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     login() {
-      fetch("http://localhost:5000/admin", {
+      fetch("https://node-blockchain.onrender.com/admin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

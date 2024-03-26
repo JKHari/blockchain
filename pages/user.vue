@@ -323,7 +323,7 @@ export default {
     userData() {
       const accessToken = localStorage.getItem("accessToken");
       axios
-        .get("http://localhost:5000/user/uploads", {
+        .get("https://node-blockchain.onrender.com/user/uploads", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -355,7 +355,7 @@ export default {
 
       try {
         const response = await axios.post(
-          "http://localhost:5000/upload",
+          "https://node-blockchain.onrender.com/upload",
           formData,
           {
             headers: {
@@ -380,7 +380,7 @@ export default {
     async previewImage(path) {
       this.showImage = true;
       await axios
-        .get(`http://localhost:5000/image/${path}`, {
+        .get(`https://node-blockchain.onrender.com/image/${path}`, {
           responseType: "blob",
         })
         .then((response) => {

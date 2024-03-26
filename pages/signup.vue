@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     signUp() {
-      fetch("http://localhost:5000/register", {
+      fetch("https://node-blockchain.onrender.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
