@@ -161,7 +161,15 @@
         <div
           class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl"
         >
-          <h1 class="text-2xl font-bold mb-8">Certificate</h1>
+          <div class="flex justify-between">
+            <h1 class="text-2xl font-bold mb-8">Certificate</h1>
+            <h1
+              class="text-gray-600 text-2xl font-bold mb-8 hover:text-gray-700 cursor-pointer"
+              @click="closeForm()"
+            >
+              X
+            </h1>
+          </div>
           <form id="form" novalidate>
             <div class="flex gap-5">
               <div class="relative z-0 w-full mb-5">
@@ -365,6 +373,9 @@ export default {
     create() {
       console.log("issueCertificate");
       this.showForm = true;
+    },
+    closeForm() {
+      this.showForm = false;
     },
     async previewImage(path) {
       this.showImage = true;
