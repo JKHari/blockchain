@@ -113,24 +113,22 @@
                         {{ item.data.grade }}
                       </div>
                     </td>
-                    <td
-                      class="px-12 py-4 text-sm font-medium whitespace-nowrap"
-                    >
+                    <td class="px-8 py-4 text-sm font-medium whitespace-nowrap">
                       <div
                         v-if="item.data.status === 'approved'"
-                        class="text-green-400 bg-green-100 rounded-md px-2 py-2 text-sm"
+                        class="text-green-400 bg-green-100 rounded-md px-2 py-2 text-sm text-center"
                       >
                         Approved
                       </div>
                       <div
                         v-if="item.data.status === 'rejected'"
-                        class="text-red-400 bg-red-100 rounded-md px-2 py-2 text-sm"
+                        class="text-red-400 bg-red-100 rounded-md px-2 py-2 text-sm text-center"
                       >
                         Rejected
                       </div>
                       <div
                         v-if="item.data.status === 'pending'"
-                        class="text-indigo-400 bg-indigo-100 rounded-md px-2 py-2 text-sm"
+                        class="text-indigo-400 bg-indigo-100 rounded-md px-2 py-2 text-sm text-center"
                       >
                         {{ item.data.status }}
                       </div>
@@ -163,7 +161,7 @@
         <div
           class="mx-auto max-w-md px-6 py-12 bg-white border-0 shadow-lg sm:rounded-3xl"
         >
-          <h1 class="text-2xl font-bold mb-8">Form With Floating Labels</h1>
+          <h1 class="text-2xl font-bold mb-8">Certificate</h1>
           <form id="form" novalidate>
             <div class="flex gap-5">
               <div class="relative z-0 w-full mb-5">
@@ -219,7 +217,7 @@
                   <el-date-picker
                     v-model="certificate.endDate"
                     type="date"
-                    placeholder="Start Date"
+                    placeholder="End Date"
                     :size="size"
                     class="!w-[100%] cursor-pointer"
                   />
@@ -245,7 +243,7 @@
               class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none cursor-pointer"
               @click="issueCertificate()"
             >
-              Issue certificate
+              upload
             </button>
           </form>
         </div>
@@ -271,7 +269,6 @@
                 X
               </h1>
             </div>
-            {{ image }}
             <div class="relative z-0 w-full mb-5">
               <img :src="image" alt="certificate" />
             </div>
@@ -324,10 +321,13 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response.data, "uploads");
           this.uploads = response.data;
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status === 401) {
+            this.$router.push("/");
+          }
         });
     },
     async issueCertificate() {
@@ -370,10 +370,10 @@ export default {
       this.showImage = true;
       await axios
         .get(`http://localhost:5000/image/${path}`, {
-          responseType: "blob", // Set responseType to 'blob' to fetch blob directly
+          responseType: "blob",
         })
         .then((response) => {
-          this.image = URL.createObjectURL(response.data); // Use response.data directly
+          this.image = URL.createObjectURL(response.data);
         })
         .catch((error) => {
           console.error("Error fetching image:", error);
@@ -389,45 +389,3 @@ export default {
   },
 };
 </script>
-
-<style>
-body {
-  background-color: #f0f0f0;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  margin-top: 50px;
-}
-
-h2 {
-  color: #333;
-  text-align: center;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-content {
-  padding: 20px;
-}
-
-.input-field input[type="text"]:focus {
-  border-bottom: 1px solid #2196f3;
-  box-shadow: 0 1px 0 0 #2196f3;
-}
-
-.btn {
-  background-color: #2196f3;
-  color: #fff;
-  border-radius: 20px;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #0d8bf1;
-}
-</style>

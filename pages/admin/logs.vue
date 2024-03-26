@@ -74,19 +74,20 @@ export default {
     async getLogs() {
       const admin_accessToken = localStorage.getItem("admin_accessToken");
 
-      try {
-        axios
-          .get("http://localhost:5000/data", {
-            headers: {
-              Authorization: `Bearer ${admin_accessToken}`,
-            },
-          })
-          .then((res) => {
-            this.logs = res.data.data;
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      axios
+        .get("http://localhost:5000/data", {
+          headers: {
+            Authorization: `Bearer ${admin_accessToken}`,
+          },
+        })
+        .then((res) => {
+          this.logs = res.data.data;
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            this.$router.push("/admin/login");
+          }
+        });
     },
   },
 };

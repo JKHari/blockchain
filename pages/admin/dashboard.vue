@@ -159,19 +159,20 @@ export default {
       if (!admin_accessToken) {
         this.$router.push("/admin/login");
       }
-      try {
-        axios
-          .get("http://localhost:5000/data", {
-            headers: {
-              Authorization: `Bearer ${admin_accessToken}`,
-            },
-          })
-          .then((res) => {
-            this.data = res.data.data;
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      axios
+        .get("http://localhost:5000/data", {
+          headers: {
+            Authorization: `Bearer ${admin_accessToken}`,
+          },
+        })
+        .then((res) => {
+          this.data = res.data.data;
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            this.$router.push("/admin/login");
+          }
+        });
     },
     statusUpdate(id, status) {
       console.log(id, status);
