@@ -3,6 +3,12 @@
     <div class="mt-[40px]">
       <div class="flex justify-between">
         <div class="text-[#0F102C] font-[700] text-2xl">Admin</div>
+        <nuxt-link
+          :to="'/admin/logs'"
+          class="font-[700] text-md bg-blue-600 px-4 rounded-md cursor-pointer py-2 text-white"
+        >
+          Logs
+        </nuxt-link>
       </div>
     </div>
     <div class="flex flex-col mt-6">
@@ -108,13 +114,13 @@
                     </div>
                     <div
                       v-if="item.value.data.status === 'approved'"
-                      class="px-4 py-2 text-sm text-green-400 rounded-md cursor-pointer hover:bg-red-500"
+                      class="px-4 py-2 text-sm text-green-400 rounded-md"
                     >
                       Approved
                     </div>
                     <div
                       v-if="item.value.data.status === 'rejected'"
-                      class="px-4 py-2 text-sm text-red-400 rounded-md cursor-pointer hover:bg-red-500"
+                      class="px-4 py-2 text-sm text-red-400 rounded-md"
                     >
                       Rejected
                     </div>
@@ -139,7 +145,11 @@ export default {
   mounted() {
     this.getData();
     const admin_accessToken = localStorage.getItem("admin_accessToken");
-    if (!admin_accessToken) {
+    if (
+      admin_accessToken === null ||
+      admin_accessToken === "" ||
+      admin_accessToken === "undefined"
+    ) {
       this.$router.push("/admin/login");
     }
   },
@@ -167,13 +177,20 @@ export default {
       console.log(id, status);
 
       axios
-        .get(`http://localhost:5000/admin/status?id=${id}&status=${status}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "admin_accessToken"
-            )}`,
+        .post(
+          `http://localhost:5000/admin/status`,
+          {
+            id: id,
+            status: status,
           },
-        })
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem(
+                "admin_accessToken"
+              )}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           this.getData();

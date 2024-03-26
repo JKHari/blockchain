@@ -271,6 +271,7 @@
                 X
               </h1>
             </div>
+            {{ image }}
             <div class="relative z-0 w-full mb-5">
               <img :src="image" alt="certificate" />
             </div>
@@ -305,7 +306,11 @@ export default {
   mounted() {
     this.userData();
     const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
+    if (
+      accessToken === null ||
+      accessToken === "" ||
+      accessToken === "undefined"
+    ) {
       this.$router.push("/");
     }
   },
@@ -361,10 +366,10 @@ export default {
       console.log("issueCertificate");
       this.showForm = true;
     },
-    previewImage(path) {
+    async previewImage(path) {
       this.showImage = true;
-      axios
-        .get(`http://localhost:5000/image?name=${path}`, {
+      await axios
+        .get(`http://localhost:5000/image/${path}`, {
           responseType: "blob", // Set responseType to 'blob' to fetch blob directly
         })
         .then((response) => {

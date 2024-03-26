@@ -64,7 +64,11 @@ export default {
   },
   mounted() {
     const admin_accessToken = localStorage.getItem("admin_accessToken");
-    if (admin_accessToken) {
+    if (
+      !admin_accessToken === null ||
+      !admin_accessToken === "" ||
+      !admin_accessToken === "undefined"
+    ) {
       this.$router.push("/admin/dashboard");
     }
   },

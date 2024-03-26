@@ -9,7 +9,7 @@
           <input
             v-model="user.email"
             class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
-            placeholder="User Name"
+            placeholder="Email"
           />
         </div>
         <!-- password input -->
@@ -60,7 +60,11 @@ export default {
   },
   mounted() {
     const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
+    if (
+      !accessToken === null ||
+      !accessToken === "" ||
+      !accessToken === "undefined"
+    ) {
       this.$router.push("/user");
     }
   },
@@ -75,6 +79,7 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data.error) {
             alert(data.error);
           } else {
