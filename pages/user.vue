@@ -25,7 +25,7 @@
                     <th
                       class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-black"
                     >
-                      <span>NO</span>
+                      <span>No</span>
                     </th>
 
                     <th

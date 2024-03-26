@@ -156,9 +156,7 @@ export default {
   methods: {
     async getData() {
       const admin_accessToken = localStorage.getItem("accessToken");
-      if (!admin_accessToken) {
-        this.$router.push("/admin/login");
-      }
+
       axios
         .get("http://localhost:5000/data", {
           headers: {

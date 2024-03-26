@@ -83,7 +83,6 @@ export default {
           if (data.error) {
             alert(data.error);
           } else {
-            console.log(data);
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
             this.$router.push("/user");
