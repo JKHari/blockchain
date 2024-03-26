@@ -18,6 +18,7 @@
         <div class="w-3/4 mb-6">
           <input
             v-model="user.password"
+            type="password"
             class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
             placeholder="Password"
           />
@@ -64,11 +65,7 @@ export default {
   },
   mounted() {
     const admin_accessToken = localStorage.getItem("admin_accessToken");
-    if (
-      !admin_accessToken === null ||
-      !admin_accessToken === "" ||
-      !admin_accessToken === "undefined"
-    ) {
+    if (admin_accessToken) {
       this.$router.push("/admin/dashboard");
     }
   },
@@ -89,6 +86,8 @@ export default {
             console.log(data);
             localStorage.setItem("admin_accessToken", data.accessToken);
             localStorage.setItem("admin_refreshToken", data.refreshToken);
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
             this.$router.push("/admin/dashboard");
           }
         });

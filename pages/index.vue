@@ -16,6 +16,7 @@
         <div class="w-3/4 mb-6">
           <input
             v-model="user.password"
+            type="password"
             class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
             placeholder="Password"
           />
@@ -30,7 +31,7 @@
               @click="gotoSignUp()"
               class="text-sm text-slate-400 hover:text-blue-500 cursor-pointer"
             >
-              register
+              Register
             </p>
           </div>
         </div>
@@ -60,11 +61,7 @@ export default {
   },
   mounted() {
     const accessToken = localStorage.getItem("accessToken");
-    if (
-      !accessToken === null ||
-      !accessToken === "" ||
-      !accessToken === "undefined"
-    ) {
+    if (accessToken) {
       this.$router.push("/user");
     }
   },
@@ -85,6 +82,9 @@ export default {
           } else {
             localStorage.setItem("accessToken", data.accessToken);
             localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.removeItem("admin_accessToken");
+            localStorage.removeItem("admin_refreshToken");
+
             this.$router.push("/user");
           }
         });

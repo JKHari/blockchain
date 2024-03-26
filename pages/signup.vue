@@ -25,6 +25,7 @@
         <div class="w-3/4 mb-6">
           <input
             v-model="user.password"
+            type="password"
             class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
             placeholder="Password"
           />
