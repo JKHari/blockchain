@@ -58,6 +58,12 @@ export default {
       },
     };
   },
+  mounted() {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      this.$router.push("/user");
+    }
+  },
   methods: {
     login() {
       fetch("http://localhost:5000/login", {

@@ -253,7 +253,7 @@
     </div>
     <div>
       <div
-        v-if="showImage"
+        v-show="showImage"
         class="absolute w-full z-10 h-screen overflow-hidden top-0 left-0"
       >
         <div

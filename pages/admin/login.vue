@@ -62,6 +62,12 @@ export default {
       },
     };
   },
+  mounted() {
+    const admin_accessToken = localStorage.getItem("admin_accessToken");
+    if (admin_accessToken) {
+      this.$router.push("/admin/dashboard");
+    }
+  },
   methods: {
     login() {
       fetch("http://localhost:5000/admin", {

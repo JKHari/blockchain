@@ -93,18 +93,30 @@
 
                   <td class="flex gap-2 justify-around mt-2">
                     <div
-                      v-if="item.value.data.status != 'rejected'"
+                      v-if="item.value.data.status === 'pending'"
                       class="px-4 py-2 text-xs bg-green-400 rounded-md text-white cursor-pointer hover:bg-green-500"
                       @click="statusUpdate(item.key, 'approved')"
                     >
                       Approve
                     </div>
                     <div
-                      v-if="item.value.data.status != 'approved'"
+                      v-if="item.value.data.status === 'pending'"
                       class="px-4 py-2 text-xs bg-red-400 rounded-md text-white cursor-pointer hover:bg-red-500"
                       @click="statusUpdate(item.key, 'rejected')"
                     >
                       Reject
+                    </div>
+                    <div
+                      v-if="item.value.data.status === 'approved'"
+                      class="px-4 py-2 text-sm text-green-400 rounded-md cursor-pointer hover:bg-red-500"
+                    >
+                      Approved
+                    </div>
+                    <div
+                      v-if="item.value.data.status === 'rejected'"
+                      class="px-4 py-2 text-sm text-red-400 rounded-md cursor-pointer hover:bg-red-500"
+                    >
+                      Rejected
                     </div>
                   </td>
                 </tr>
@@ -126,7 +138,7 @@ export default {
   },
   mounted() {
     this.getData();
-    const admin_accessToken = localStorage.getItem("accessToken");
+    const admin_accessToken = localStorage.getItem("admin_accessToken");
     if (!admin_accessToken) {
       this.$router.push("/admin/login");
     }
