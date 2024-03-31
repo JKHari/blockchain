@@ -249,10 +249,12 @@
   </div>
 </template>
 <script>
+import { useToast } from "vue-toastification";
 import axios from "axios";
 export default {
   data() {
     return {
+      toast: useToast(),
       files: [],
       showImage: false,
       uploads: [],
@@ -287,7 +289,7 @@ export default {
         })
         .catch((error) => {
           if (error.response.status === 401) {
-            this.$router.push("/");
+            this.$router.push("/college/login");
           }
         });
     },
@@ -318,6 +320,7 @@ export default {
           }
         );
         console.log(response.data);
+        this.toast.success("Certificate issued successfully");
         this.userData();
       } catch (error) {
         console.error("There was an error uploading the file:", error);

@@ -1,136 +1,146 @@
 <template>
-  <div class="text-[#0F102C] font-[700] text-2xl p-5">Search Certificate</div>
-  <div class="container pm-certificate-container">
-    <div class="outer-border"></div>
-    <div class="inner-border"></div>
-
-    <div class="pm-certificate-border col-span-12">
-      <div class="row pm-certificate-header">
-        <div class="pm-certificate-title cursive col-span-12 text-center">
-          <h2>Buffalo Public Schools Certificate of Completion</h2>
+  <div>
+    <div class="text-[#0F102C] font-[700] text-2xl p-5">Search Certificate</div>
+    <div class="w-full flex justify-end pr-5">
+      <div class="flex">
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <input
+            type="text"
+            v-model="search"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5 outline-none"
+            placeholder="Search "
+            required
+          />
         </div>
+        <button
+          @click="searchFilter()"
+          class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        >
+          <svg
+            class="w-4 h-4"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+          <span class="sr-only">Search</span>
+        </button>
       </div>
+    </div>
+    <div class="mt-8">
+      <div
+        class="relative mx-auto bg-[#618597] p-8 text-[#333] font-sans shadow-md flex justify-center items-center"
+        style="width: 800px; height: 600px"
+      >
+        <div class="absolute">
+          <div
+            class="border-2 border-white absolute"
+            style="
+              width: 794px;
+              height: 594px;
+              transform: translate(-50%, -50%);
+            "
+          />
+          <div
+            class="border-2 border-white absolute"
+            style="
+              width: 730px;
+              height: 530px;
+              transform: translate(-50%, -50%);
+            "
+          />
 
-      <div class="row pm-certificate-body">
-        <div class="pm-certificate-block">
-          <div class="col-span-12">
-            <div class="row">
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-              <div
-                class="pm-certificate-name underline margin-0 col-span-8 text-center"
-              >
-                <span class="pm-name-text font-bold"
-                  >TrueNorth Administrator</span
-                >
-              </div>
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
+          <div
+            class="absolute border bg-white p-0"
+            style="
+              width: 720px;
+              height: 520px;
+              transform: translate(-50%, -50%);
+            "
+          >
+            <!-- Certificate Header -->
+            <div class="font-pinyon-script-regular text-center mt-10">
+              <h2 class="font-pinyonScript text-3xl">
+                Certificate of Completion
+              </h2>
             </div>
-          </div>
 
-          <div class="col-span-12">
-            <div class="row">
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-              <div class="pm-earned col-span-8 text-center">
-                <span class="pm-earned-text padding-0 block cursive"
-                  >has earned</span
+            <!-- Certificate Body -->
+            <div class="px-5 mt-5">
+              <!-- Name Section -->
+              <div class="flex justify-center">
+                <div
+                  class="text-center border-b-2 border-gray-700 py-2 mb-4"
+                  style="width: 80%"
                 >
-                <span class="pm-credits-text block font-bold sans"
-                  >PD175: 1.0 Credit Hours</span
-                >
+                  <span class="font-bold text-xl">TrueNorth Administrator</span>
+                </div>
               </div>
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-              <div class="col-span-12"></div>
-            </div>
-          </div>
 
-          <div class="col-span-12">
-            <div class="row">
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-              <div class="pm-course-title col-span-8 text-center">
-                <span class="pm-earned-text block cursive"
+              <!-- Course and Credit Section -->
+              <div class="text-center mt-3">
+                <span class="block font-pinyonScript text-xl">has earned</span>
+                <span class="block font-bold">PD175: 1.0 Credit Hours</span>
+              </div>
+
+              <div class="text-center mt-2">
+                <span class="block font-pinyonScript text-xl"
                   >while completing the training course entitled</span
                 >
               </div>
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-            </div>
-          </div>
 
-          <div class="col-span-12">
-            <div class="row">
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
-              <div class="pm-course-title underline col-span-8 text-center">
-                <span class="pm-credits-text block font-bold sans"
-                  >BPS PGS Initial PLO for Principals at Cluster Meetings</span
+              <div class="flex justify-center mt-1">
+                <div
+                  class="text-center border-b-2 border-gray-700 py-2"
+                  style="width: 80%"
                 >
+                  <span class="block font-bold"
+                    >BPS PGS Initial PLO for Principals at Cluster
+                    Meetings</span
+                  >
+                </div>
               </div>
-              <div class="col-span-2"><!-- LEAVE EMPTY --></div>
             </div>
-          </div>
-        </div>
 
-        <div class="col-span-12">
-          <div class="row">
-            <div class="pm-certificate-footer">
-              <div class="col-span-4 pm-certified col-span-4 text-center">
-                <span class="pm-credits-text block sans"
-                  >Buffalo City School District</span
-                >
-                <span class="pm-empty-space block underline"></span>
-                <span class="font-bold block"
-                  >Crystal Benton Instructional Specialist II, Staff
-                  Development</span
-                >
-              </div>
-              <div class="col-span-4">
-                <!-- LEAVE EMPTY -->
-              </div>
-              <div class="col-span-4 pm-certified col-span-4 text-center">
-                <span class="pm-credits-text block sans">Date Completed</span>
-                <span class="pm-empty-space block underline"></span>
-                <span class="font-bold block">DOB: </span>
-                <span class="font-bold block"
-                  >Social Security # (last 4 digits)</span
-                >
+            <!-- Footer -->
+            <div class="absolute bottom-5 w-full">
+              <div class="flex">
+                <div class="flex justify-around w-full text-sm">
+                  <div class="text-center">
+                    <span class="">Buffalo City School District</span>
+                    <div
+                      class="border-b-2 border-gray-700 my-2"
+                      style="height: 40px"
+                    ></div>
+                    <span class="font-bold">Crystal Benton Development</span>
+                  </div>
+
+                  <div class="text-center">
+                    <span class="block">Date Completed</span>
+                    <div
+                      class="border-b-2 border-gray-700 my-2"
+                      style="height: 40px"
+                    ></div>
+                    <span class="block font-bold">DOB:</span>
+                    <span class="block font-bold"
+                      >Social Security # (last 4 digits)</span
+                    >
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div>
-    <div class="flex items-center max-w-sm mx-auto">
-      <label for="simple-search" class="sr-only">Search</label>
-      <div class="relative w-full">
-        <input
-          type="text"
-          v-model="search"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:placeholder-gray-400"
-          placeholder="Search "
-          required
-        />
-      </div>
-      <button
-        @click="searchFilter()"
-        class="p-2.5 ms-2 text-sm font-medium text-black bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-      >
-        <svg
-          class="w-4 h-4"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
-        <span class="sr-only">Search</span>
-      </button>
     </div>
   </div>
 </template>
@@ -142,6 +152,14 @@ export default {
       search: "",
       data: [],
     };
+  },
+
+  mounted() {
+    const accessToken = localStorage.getItem("accessToken");
+    console.log(accessToken);
+    if (!accessToken) {
+      this.$router.push("/college/login");
+    }
   },
 
   methods: {
@@ -158,4 +176,6 @@ export default {
   },
 };
 </script>
+
+
 

@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   modules: [
     '@element-plus/nuxt'
   ],
+  build: {
+    transpile: ['vue-toastification'],
+  },
   postcss: {
     plugins: {
       tailwindcss: {},

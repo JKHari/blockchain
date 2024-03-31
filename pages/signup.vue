@@ -46,9 +46,11 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
 export default {
   data() {
     return {
+      toast: useToast(),
       user: {
         username: "",
         email: "",
@@ -67,8 +69,10 @@ export default {
       }).then((data) => {
         if (data.error) {
           console.log("cant register");
+          this.toast.error("Some thing wrong!");
         } else {
-          this.$router.push("/");
+          this.toast.success(" Register Successfully");
+          this.$router.push("/college/login");
         }
       });
     },

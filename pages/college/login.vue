@@ -50,9 +50,12 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
+
 export default {
   data() {
     return {
+      toast: useToast(),
       user: {
         email: "",
         password: "",
@@ -66,25 +69,26 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       fetch("https://node-blockchain.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(this.user),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.error) {
-            alert(data.error);
-          } else {
+      }).then((res) => {
+        if (res.status === 200) {
+          res.json().then((data) => {
             localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("accessToken", data.refreshToken);
+            this.toast.success("Login successful");
             this.$router.push("/dashboard");
-          }
-        });
+          });
+        } else {
+          this.toast.error("Invalid email or password");
+          console.log("Invalid email or password");
+        }
+      });
     },
     gotoSignUp() {
       this.$router.push("/signup");

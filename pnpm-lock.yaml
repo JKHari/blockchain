@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@nuxtjs/toast':
+    specifier: ^3.3.1
+    version: 3.3.1
   axios:
     specifier: ^1.6.8
     version: 1.6.8
@@ -32,6 +35,9 @@ dependencies:
   vue-router:
     specifier: ^4.3.0
     version: 4.3.0(vue@3.4.21)
+  vue-toastification:
+    specifier: ^2.0.0-rc.5
+    version: 2.0.0-rc.5(vue@3.4.21)
 
 devDependencies:
   '@element-plus/nuxt':
@@ -1140,6 +1146,12 @@ packages:
       - vls
       - vti
       - vue-tsc
+    dev: false
+
+  /@nuxtjs/toast@3.3.1:
+    resolution: {integrity: sha512-b9JpyjSw5ZOyjskBvNc4NEebe0qxB6LivBlO84gHOnsaF23rLkJoBfVNDcXwGNDl7vm09yM4WqBGTkm/OQ0ZCQ==}
+    dependencies:
+      vue-toasted: 1.1.28
     dev: false
 
   /@parcel/watcher-android-arm64@2.4.1:
@@ -7130,6 +7142,18 @@ packages:
       vue: ^3.2.0
     dependencies:
       '@vue/devtools-api': 6.6.1
+      vue: 3.4.21
+    dev: false
+
+  /vue-toasted@1.1.28:
+    resolution: {integrity: sha512-UUzr5LX51UbbiROSGZ49GOgSzFxaMHK6L00JV8fir/CYNJCpIIvNZ5YmS4Qc8Y2+Z/4VVYRpeQL2UO0G800Raw==}
+    dev: false
+
+  /vue-toastification@2.0.0-rc.5(vue@3.4.21):
+    resolution: {integrity: sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
       vue: 3.4.21
     dev: false
 
