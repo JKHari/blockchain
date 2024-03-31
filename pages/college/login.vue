@@ -3,15 +3,13 @@
     <div class="flex justify-center h-screen w-screen items-center">
       <div class="w-full md:w-1/2 flex flex-col items-center">
         <!-- text login -->
-        <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">
-          Admin Login
-        </h1>
+        <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">LOGIN</h1>
         <!-- email input -->
         <div class="w-3/4 mb-6">
           <input
-            v-model="user.username"
+            v-model="user.email"
             class="w-full py-4 px-8 bg-slate-200 placeholder:font-semibold rounded hover:ring-1 outline-blue-500"
-            placeholder="User Name"
+            placeholder="Email"
           />
         </div>
         <!-- password input -->
@@ -24,21 +22,19 @@
           />
         </div>
         <!-- remember input -->
-        <!-- <div class="w-3/4 flex flex-row justify-between">
+        <div class="w-3/4 flex flex-row justify-between">
           <div class="flex items-center gap-x-1">
-            <label for="" class="text-sm text-slate-400"
-              >Don't Have an account</label
-            >
+            <span class="text-sm text-slate-400">Dont Have an account</span>
           </div>
           <div>
             <p
               @click="gotoSignUp()"
               class="text-sm text-slate-400 hover:text-blue-500 cursor-pointer"
             >
-              register
+              Register
             </p>
           </div>
-        </div> -->
+        </div>
         <!-- button -->
         <div class="w-3/4 mt-4">
           <button
@@ -58,20 +54,20 @@ export default {
   data() {
     return {
       user: {
-        username: "",
+        email: "",
         password: "",
       },
     };
   },
   mounted() {
-    const admin_accessToken = localStorage.getItem("admin_accessToken");
-    if (admin_accessToken) {
-      this.$router.push("/admin/dashboard");
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      this.$router.push("/dashboard");
     }
   },
   methods: {
     login() {
-      fetch("https://node-blockchain.onrender.com/admin", {
+      fetch("https://node-blockchain.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,17 +76,18 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data.error) {
             alert(data.error);
           } else {
-            console.log(data);
-            localStorage.setItem("admin_accessToken", data.accessToken);
-            localStorage.setItem("admin_refreshToken", data.refreshToken);
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            this.$router.push("/admin/dashboard");
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            this.$router.push("/dashboard");
           }
         });
+    },
+    gotoSignUp() {
+      this.$router.push("/signup");
     },
   },
 };
