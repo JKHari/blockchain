@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-[#0F102C] font-[700] text-2xl p-5">Search Certificate</div>
-    <div class="w-full flex justify-end pr-5">
+    <div class="w-full flex justify-end md:pr-5">
       <div class="flex">
         <label for="simple-search" class="sr-only">Search</label>
         <div class="relative w-full">
@@ -68,21 +68,21 @@
             "
           >
             <!-- Certificate Header -->
-            <div class="font-pinyon-script-regular text-center mt-10">
-              <h2 class="font-pinyonScript text-3xl">
+            <div class="font-pinyon text-center mt-10">
+              <h2 class="font-pinyonScript text-5xl">
                 Certificate of Completion
               </h2>
             </div>
 
             <!-- Certificate Body -->
-            <div class="px-5 mt-5">
+            <div class="px-5 mt-12">
               <!-- Name Section -->
               <div class="flex justify-center">
                 <div
                   class="text-center border-b-2 border-gray-700 py-2 mb-4"
                   style="width: 80%"
                 >
-                  <span class="font-bold text-xl">TrueNorth Administrator</span>
+                  <span class="font-bold text-xl">Name</span>
                 </div>
               </div>
 
@@ -114,23 +114,15 @@
             <!-- Footer -->
             <div class="absolute bottom-5 w-full">
               <div class="flex">
-                <div class="flex justify-around w-full text-sm">
-                  <div class="text-center">
-                    <span class="">Buffalo City School District</span>
-                    <div
-                      class="border-b-2 border-gray-700 my-2"
-                      style="height: 40px"
-                    ></div>
-                    <span class="font-bold">Crystal Benton Development</span>
-                  </div>
-
+                <div class="flex justify-end pr-10 w-full text-sm">
                   <div class="text-center">
                     <span class="block">Date Completed</span>
                     <div
                       class="border-b-2 border-gray-700 my-2"
-                      style="height: 40px"
-                    ></div>
-                    <span class="block font-bold">DOB:</span>
+                      style="height: 30px"
+                    >
+                      date
+                    </div>
                     <span class="block font-bold"
                       >Social Security # (last 4 digits)</span
                     >
