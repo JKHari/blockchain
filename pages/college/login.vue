@@ -79,8 +79,9 @@ export default {
       }).then((res) => {
         if (res.status === 200) {
           res.json().then((data) => {
+            console.log(data);
             localStorage.setItem("accessToken", data.accessToken);
-            localStorage.setItem("accessToken", data.refreshToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
             this.toast.success("Login successful");
             this.$router.push("/dashboard");
           });

@@ -36,7 +36,7 @@
         </button>
       </div>
     </div>
-    <div class="mt-8">
+    <div class="mt-8" v-if="data !== null">
       <div
         class="relative mx-auto bg-[#618597] p-8 text-[#333] font-sans shadow-md flex justify-center items-center"
         style="width: 800px; height: 600px"
@@ -82,14 +82,19 @@
                   class="text-center border-b-2 border-gray-700 py-2 mb-4"
                   style="width: 80%"
                 >
-                  <span class="font-bold text-xl">Name</span>
+                  <span class="font-bold text-xl"
+                    >{{ data.firstName }}{{ data.lastName }}</span
+                  >
                 </div>
               </div>
 
               <!-- Course and Credit Section -->
               <div class="text-center mt-3">
                 <span class="block font-pinyonScript text-xl">has earned</span>
-                <span class="block font-bold">PD175: 1.0 Credit Hours</span>
+                <span class="block font-bold"
+                  >{{ data.courseName }}: {{ data.courseLength }} Credit
+                  Hours</span
+                >
               </div>
 
               <div class="text-center mt-2">
@@ -121,10 +126,12 @@
                       class="border-b-2 border-gray-700 my-2"
                       style="height: 30px"
                     >
-                      date
+                      {{ data.endDate.split(" ")[1] }}
+                      {{ data.endDate.split(" ")[2] }}
+                      {{ data.endDate.split(" ")[3] }}
                     </div>
                     <span class="block font-bold"
-                      >Social Security # (last 4 digits)</span
+                      >Provider User Id # ({{ data.userId }})</span
                     >
                   </div>
                 </div>
@@ -138,29 +145,37 @@
 </template>
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
 export default {
   data() {
     return {
+      toast: useToast(),
       search: "",
-      data: [],
+      data: null,
     };
   },
 
   mounted() {
-    const accessToken = localStorage.getItem("accessToken");
-    console.log(accessToken);
-    if (!accessToken) {
-      this.$router.push("/college/login");
-    }
+    // const accessToken = localStorage.getItem("accessToken");
+    // console.log(accessToken);
+    // if (!accessToken) {
+    //   this.$router.push("/college/login");
+    // }
+    console.log("mounted", this.data);
   },
 
   methods: {
-    searchFilter() {
+    async searchFilter() {
       try {
-        const response = axios.get(
+        const response = await axios.get(
           `https://node-blockchain.onrender.com/search?id=${this.search}`
         );
-        this.data = response.data;
+        if (response.data.success) {
+          this.data = response.data.data;
+        } else {
+          this.toast.error(response.data.message);
+        }
+        console.log(this.data);
       } catch (error) {
         console.error(error);
       }

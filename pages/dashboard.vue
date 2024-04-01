@@ -240,7 +240,10 @@
               </h1>
             </div>
             <div class="relative z-0 w-full mb-5">
-              <img :src="image" alt="certificate" />
+              <img
+                :src="`https://node-blockchain.onrender.com/image/${path}`"
+                alt="certificate"
+              />
             </div>
           </div>
         </div>
@@ -258,7 +261,7 @@ export default {
       files: [],
       showImage: false,
       uploads: [],
-      img: "",
+      path: "",
       showForm: false,
       certificate: {
         firstName: "",
@@ -289,6 +292,7 @@ export default {
         })
         .catch((error) => {
           if (error.response.status === 401) {
+            localStorage.removeItem("accessToken");
             this.$router.push("/college/login");
           }
         });
@@ -334,17 +338,8 @@ export default {
       this.showForm = false;
     },
     async previewImage(path) {
+      this.path = path;
       this.showImage = true;
-      await axios
-        .get(`https://node-blockchain.onrender.com/image/${path}`, {
-          responseType: "blob",
-        })
-        .then((response) => {
-          this.image = URL.createObjectURL(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching image:", error);
-        });
     },
     closePreviewImage() {
       this.showImage = false;
